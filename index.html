@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="/station.webp" type="image/webp">
+<link rel="preload" as="image" href="/station-wide.webp" type="image/webp">
 <style>
 :root{--navy:#0E1B2C;--navy2:#142740;--navy3:#1D2F45;--line:#33475F;--gold:#F2B544;--cream:#F5F1E8;--muted:#B9C2CE;--ink2:#4A5566}
 *{box-sizing:border-box}
@@ -26,13 +26,13 @@ html{scroll-behavior:smooth}
 body{margin:0;background:var(--navy);color:var(--cream);font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 a{color:var(--gold)}a:hover{color:#F7CB72}
 h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0}
-.wrap{max-width:1240px;margin:0 auto;padding-left:24px;padding-right:24px}
+.wrap{width:100%;padding-left:clamp(20px,5vw,96px);padding-right:clamp(20px,5vw,96px)}
 .eyebrow{font-size:14px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .skip{position:absolute;left:-999px}.skip:focus{left:16px;top:16px;background:var(--gold);color:var(--navy);padding:10px 14px;border-radius:8px;z-index:10}
 
 /* header */
-.hdr{display:flex;align-items:center;gap:20px 32px;padding-top:22px;padding-bottom:22px}
+.hdr{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;gap:20px 32px;padding-top:22px;padding-bottom:22px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--cream)}
 .wm{font-family:'Outfit',sans-serif;font-size:24px;white-space:nowrap;line-height:1}
 .wm b{font-weight:600}.wm span.l{font-weight:300;color:var(--muted)}
@@ -44,12 +44,18 @@ h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0}
 .btn-ghost:hover{border-color:var(--gold);color:var(--cream)}
 @media (max-width:860px){.nav{display:none}.hdr{justify-content:space-between}}
 
-/* hero */
-.hero{display:flex;flex-wrap:wrap;align-items:center;gap:48px;padding-top:40px;padding-bottom:88px}
-.hero-copy{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:24px}
-.hero h1{font-weight:500;font-size:clamp(42px,6vw,76px);line-height:1.04;letter-spacing:-.02em}
-.lead{margin:0;font-size:19px;line-height:1.6;color:var(--muted);max-width:580px}
-.finder{display:flex;flex-direction:column;gap:12px;background:var(--navy2);border-radius:24px;padding:18px;max-width:620px}
+/* hero (full-bleed) */
+.hero{position:relative;min-height:clamp(640px,94vh,980px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:var(--navy)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.slide{position:absolute;inset:0;opacity:0;animation:fade 12s infinite}
+.slide:nth-child(2){animation-delay:6s}
+.slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 55%}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,27,44,.96) 0%,rgba(14,27,44,.86) 34%,rgba(14,27,44,.35) 64%,rgba(14,27,44,.15) 100%),linear-gradient(0deg,rgba(14,27,44,.9) 0%,rgba(14,27,44,0) 28%),linear-gradient(180deg,rgba(14,27,44,.75) 0%,rgba(14,27,44,0) 22%)}
+.hero-inner{position:relative;z-index:1;padding-top:120px;padding-bottom:110px}
+.hero-copy{max-width:640px;display:flex;flex-direction:column;gap:24px}
+.hero h1{font-weight:500;font-size:clamp(44px,6.2vw,92px);line-height:1.02;letter-spacing:-.02em}
+.lead{margin:0;font-size:clamp(17px,1.4vw,20px);line-height:1.6;color:#D3DAE3;max-width:580px}
+.finder{display:flex;flex-direction:column;gap:12px;background:rgba(20,39,64,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:18px;max-width:620px}
 .finder-t{font-size:14px;font-weight:700}
 .finder-row{display:flex;flex-wrap:wrap;gap:10px}
 .field{flex:1 1 260px;display:flex;align-items:center;gap:10px;background:var(--cream);border-radius:999px;padding:0 18px;min-height:54px}
@@ -58,23 +64,17 @@ h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0}
 .btn-gold:hover{background:#F7CB72;color:var(--navy)}
 .finder-msg{font-size:14px;line-height:1.55;color:var(--muted);display:none}
 .finder-msg.show{display:block}
-.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-
-.show{flex:1 1 400px;min-width:0;display:flex;flex-direction:column;gap:16px;max-width:600px;margin:0 auto}
-.slides{position:relative;width:100%;aspect-ratio:600/560;border-radius:32px;overflow:hidden;background:var(--navy2)}
-.slide{position:absolute;inset:0;opacity:0;animation:fade 12s infinite}
-.slide:nth-child(2){animation-delay:6s}
-.slide img{display:block;width:100%;height:100%;object-fit:cover}
-.slide::after{content:"";position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(transparent,rgba(14,27,44,.75))}
-.chip{position:absolute;left:20px;bottom:20px;z-index:1;background:rgba(14,27,44,.82);color:var(--cream);font-size:13px;font-weight:700;padding:8px 14px;border-radius:999px}
-.dots{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.dots div{display:flex;gap:8px}
-.dot{height:10px;width:10px;border-radius:5px;background:var(--line);animation:dot 12s infinite}
+.hero-foot{position:absolute;z-index:1;left:0;right:0;bottom:28px;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.hero-foot .dots{display:flex;gap:8px}
+.dot{height:10px;width:10px;border-radius:5px;background:rgba(245,241,232,.35);animation:dot 12s infinite}
 .dot:nth-child(2){animation-delay:6s}
-.dots p{margin:0;font-size:14px;color:var(--muted)}
+.caps{position:relative;font-size:14px;font-weight:700;color:var(--cream);min-width:200px;text-align:right;height:20px}
+.caps span{position:absolute;right:0;top:0;opacity:0;white-space:nowrap;animation:fade 12s infinite}
+.caps span:nth-child(2){animation-delay:6s}
 @keyframes fade{0%{opacity:0}6%,46%{opacity:1}52%,100%{opacity:0}}
-@keyframes dot{0%{background:var(--line);width:10px}6%,46%{background:var(--gold);width:28px}52%,100%{background:var(--line);width:10px}}
-@media (prefers-reduced-motion:reduce){.slide,.dot{animation:none}.slide:first-child{opacity:1}html{scroll-behavior:auto}}
+@keyframes dot{0%{background:rgba(245,241,232,.35);width:10px}6%,46%{background:var(--gold);width:28px}52%,100%{background:rgba(245,241,232,.35);width:10px}}
+@media (prefers-reduced-motion:reduce){.slide,.dot,.caps span{animation:none}.slide:first-child,.caps span:first-child{opacity:1}html{scroll-behavior:auto}}
+@media (max-width:760px){.hero-bg::after{background:linear-gradient(180deg,rgba(14,27,44,.8) 0%,rgba(14,27,44,.72) 45%,rgba(14,27,44,.95) 100%)}.hero-inner{padding-top:110px;padding-bottom:90px}.caps{display:none}}
 
 /* services */
 .light{background:var(--cream);color:var(--navy)}
@@ -153,12 +153,17 @@ footer{border-top:1px solid #22344B}
 </header>
 
 <main id="main">
-  <section class="wrap hero">
-    <div class="hero-copy">
-      <div class="eyebrow">Clean energy for Nigeria</div>
-      <h1>Power for every part of life.</h1>
-      <p class="lead">Fast charging for electric vehicles, plus solar and battery systems for homes and businesses. Serving Abuja, Lagos, Port Harcourt, Calabar and Owerri.</p>
-      <form class="finder" role="search" id="finder">
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="false">
+      <div class="slide"><img src="/station-wide.webp" width="1600" height="1600" alt="Anvil Energies EV charging station at dusk" fetchpriority="high"></div>
+      <div class="slide"><img src="/battery-wide.webp" width="1600" height="1600" alt="Anvil Energies home battery mounted on a wall" loading="lazy"></div>
+    </div>
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">Clean energy for Nigeria</div>
+        <h1>Power for every part of life.</h1>
+        <p class="lead">Fast charging for electric vehicles, plus solar and battery systems for homes and businesses. Serving Abuja, Lagos, Port Harcourt, Calabar and Owerri.</p>
+        <form class="finder" role="search" id="finder">
         <label class="finder-t" for="q">Find a charger near you</label>
         <div class="finder-row">
           <div class="field">
@@ -169,15 +174,9 @@ footer{border-top:1px solid #22344B}
         </div>
         <p class="finder-msg" id="finder-msg" role="status" aria-live="polite"></p>
       </form>
-    </div>
-
-    <div class="show">
-      <div class="slides">
-        <div class="slide"><img src="/station.webp" width="1200" height="1200" alt="Anvil Energies EV charging station at dusk" fetchpriority="high"><span class="chip">Anvil charging station</span></div>
-        <div class="slide"><img src="/battery.webp" width="1200" height="1200" alt="Anvil Energies home battery mounted on a wall" loading="lazy"><span class="chip">Anvil home battery</span></div>
       </div>
-      <div class="dots" aria-hidden="true"><div><span class="dot"></span><span class="dot"></span></div><p>Charging stations · Home batteries</p></div>
     </div>
+    <div class="wrap hero-foot" aria-hidden="true"><div class="dots"><span class="dot"></span><span class="dot"></span></div><div class="caps"><span>Anvil charging station</span><span>Anvil home battery</span></div></div>
   </section>
 
   <section class="light" id="services">
