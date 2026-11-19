@@ -22,8 +22,8 @@
 :root{
   --navy:#0E1B2C;--navy-hover:#1B2D47;--line:#22344B;
   --gold:#F2B544;--gold-hover:#F7CB72;
-  --dawn:#F9E3CC;--morning:#F6D6B4;--noon:#E3EEF5;--cream:#F5F1E8;
-  --ink2:#3B4656;--brown:#5A3A06;--slate:#33475F;--muted:#B9C2CE;--soft:#C9D1DC;
+  --dawn:#F9E3CC;--cream:#F5F1E8;
+  --ink2:#3B4656;--brown:#5A3A06;--muted:#B9C2CE;--soft:#C9D1DC;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -75,46 +75,27 @@ h1,h2,p{margin:0}
 .chip{border:1.5px solid var(--navy);border-radius:999px;padding:0 16px;min-height:40px;display:inline-flex;align-items:center;font-weight:800;font-size:14px;text-decoration:none}
 .chip:hover{background:var(--navy);color:var(--dawn)}
 
-/* time-of-day sections */
-.slot{padding-top:84px;padding-bottom:84px;overflow:hidden}
+/* service sections: one background throughout */
+.slot{padding-top:84px;padding-bottom:84px;overflow:hidden;background:var(--dawn);border-top:1px solid rgba(14,27,44,.12)}
 .slot-in{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:center;justify-content:space-between}
 .slot-in.flip{flex-wrap:wrap-reverse}
 .copy{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px}
-.time{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(88px,11vw,168px);line-height:.9;letter-spacing:-.04em}
+.slot .eyebrow{color:var(--brown)}
+.word{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(56px,8vw,124px);line-height:.95;letter-spacing:-.04em}
 .slot h2{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(34px,4.2vw,58px);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
 .slot h2 i{font-style:italic;font-weight:300}
-.slot p{font-size:19px;line-height:1.65;max-width:460px}
+.slot p{font-size:19px;line-height:1.65;max-width:460px;color:var(--ink2)}
 .more{font-weight:800;font-size:17px;width:fit-content}
 .pic{position:relative;flex:1 1 360px;max-width:460px;min-width:0}
-.arch{aspect-ratio:4/5;border-radius:999px 999px 28px 28px;overflow:hidden}
+.arch{aspect-ratio:4/5;border-radius:999px 999px 28px 28px;overflow:hidden;background:#EFC99A}
 .arch img{display:block;width:100%;height:100%;object-fit:cover}
 .orb{position:absolute;width:92px;height:92px;border-radius:50%;background:var(--gold)}
-
-.morning{background:var(--morning)}
-.morning .eyebrow{color:var(--brown)}
-.morning p{color:var(--ink2)}
-.morning .arch{background:#E9BE8E}
-.morning .orb{right:-34px;bottom:56px}
-
-.noon{background:var(--noon)}
-.noon .eyebrow{color:var(--slate)}
-.noon p{color:var(--ink2)}
-.noon .arch{background:#BBD6E8}
-.noon .orb{left:22%;top:-40px}
-
-.evening{background:var(--gold)}
-.evening .eyebrow,.evening p{color:#3A2C08}
-.evening .arch{background:#D99E2E}
-.evening .orb{left:-36px;bottom:40px;background:var(--dawn)}
+.s-charging .orb{left:-36px;bottom:40px}
+.s-solar .orb{left:22%;top:-40px}
+.s-batteries .orb{right:10%;top:-36px;width:84px;height:84px}
+.s-home .orb{right:-34px;bottom:56px}
 
 .night{background:var(--navy);color:var(--cream)}
-.night .eyebrow{color:var(--muted)}
-.night p{color:var(--soft)}
-.night .arch{background:#142740}
-.night h2 i{color:var(--gold)}
-.night .more{color:var(--gold)}
-.moon{position:absolute;right:10%;top:-36px;width:84px;height:84px;border-radius:50%;background:var(--cream);overflow:hidden}
-.moon::after{content:"";position:absolute;left:24px;top:-10px;width:84px;height:84px;border-radius:50%;background:var(--navy)}
 
 /* contact */
 .contact{background:var(--navy);color:var(--cream);padding-top:24px;padding-bottom:96px}
@@ -155,95 +136,95 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
       <span class="wm"><b>anv<span class="idot">ı<i></i></span>l</b> <span class="l">energies</span></span>
     </a>
     <nav class="nav" aria-label="Main">
-      <a href="#t0600">Morning</a>
-      <a href="#t1200">Midday</a>
-      <a href="#t1830">Evening</a>
-      <a href="#t2200">Night</a>
+      <a href="#charging">Charging</a>
+      <a href="#solar">Solar</a>
+      <a href="#batteries">Batteries</a>
+      <a href="#home">Home charging</a>
     </nav>
     <a class="btn" href="#contact">Contact us</a>
   </header>
   <div class="pad hero-body">
-    <div class="eyebrow">A day with Anvil</div>
+    <div class="eyebrow">EV charging · Solar · Storage</div>
     <h1 class="serif">Forging the <i>future</i> of energy.</h1>
     <p class="lead">Fast charging for electric vehicles, plus solar and battery systems for homes and businesses. Serving Abuja, Lagos, Port Harcourt, Calabar and Owerri.</p>
     <div class="cta-row">
-      <a class="btn btn-navy" href="#t1830">Find a charger</a>
-      <a class="btn btn-ghost" href="#t1200">Get a solar quote</a>
+      <a class="btn btn-navy" href="#charging">Find a charger</a>
+      <a class="btn btn-ghost" href="#solar">Get a solar quote</a>
     </div>
-    <nav class="follow" aria-label="Follow the day">
-      <span class="eyebrow">Follow the day</span>
-      <a class="chip" href="#t0600" aria-label="06:00, morning">06:00</a>
-      <a class="chip" href="#t1200" aria-label="12:00, midday">12:00</a>
-      <a class="chip" href="#t1830" aria-label="18:30, evening">18:30</a>
-      <a class="chip" href="#t2200" aria-label="22:00, night">22:00</a>
+    <nav class="follow" aria-label="What we do">
+      <span class="eyebrow">What we do</span>
+      <a class="chip" href="#charging">Charging stations</a>
+      <a class="chip" href="#solar">Solar</a>
+      <a class="chip" href="#batteries">Batteries</a>
+      <a class="chip" href="#home">Home charging</a>
     </nav>
   </div>
 </div>
 
 <main id="main">
 
-  <section class="slot pad morning" id="t0600" aria-labelledby="h-morning">
+  <section class="slot pad s-charging" id="charging" aria-labelledby="h-charging">
     <div class="slot-in">
       <div class="copy">
-        <div class="eyebrow">Morning · At home</div>
-        <div class="time" aria-hidden="true">06:00</div>
-        <h2 id="h-morning">The car is full before <i>you</i> are.</h2>
-        <p>Plug in when you park. Hearth is a wall-mounted charger with a looped cable, made for carports, estates and homes.</p>
-        <a class="more" href="#contact">Ask about Hearth →</a>
+        <div class="eyebrow">01 · Charging stations</div>
+        <div class="word" aria-hidden="true">Charging</div>
+        <h2 id="h-charging">Back on the road in <i>minutes.</i></h2>
+        <p>DC fast chargers at Anvil stations in Abuja, Lagos, Port Harcourt, Calabar and Owerri. Built for speed, from private cars to fleets.</p>
+        <a class="more" href="#contact">Find a charger →</a>
       </div>
       <div class="pic">
-        <div class="arch"><img src="hearth-wide.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Anvil Hearth wall charger beside a parked car in a sunlit carport" style="object-position:60% center"></div>
+        <div class="arch"><img src="plinth-wide.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Anvil Plinth charger: two navy pedestals on one shared base, with a car plugged in outside a building with palms" style="object-position:68% center"></div>
         <div class="orb" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
-  <section class="slot pad noon" id="t1200" aria-labelledby="h-noon">
+  <section class="slot pad s-solar" id="solar" aria-labelledby="h-solar">
     <div class="slot-in flip">
       <div class="pic">
         <!-- PLACEHOLDER: midday-placeholder.webp is a cropped Anvil solar-canopy station render (golden-hour light).
-             Swap in a real midday / rooftop-solar photo, 4:5 portrait, same filename or update src. -->
+             Swap in a real rooftop-solar photo, 4:5 portrait, same filename or update src. -->
         <div class="arch"><img src="midday-placeholder.webp" width="806" height="1008" loading="lazy" decoding="async" alt="Anvil charging bays under a solar canopy, with two cars plugged in" style="object-position:50% center"></div>
         <div class="orb" aria-hidden="true"></div>
       </div>
       <div class="copy">
-        <div class="eyebrow">Midday · On the roof</div>
-        <div class="time" aria-hidden="true">12:00</div>
-        <h2 id="h-noon">The roof does the <i>heavy lifting.</i></h2>
+        <div class="eyebrow">02 · Solar panels</div>
+        <div class="word" aria-hidden="true">Solar</div>
+        <h2 id="h-solar">The roof does the <i>heavy lifting.</i></h2>
         <p>Solar for homes and businesses, designed, installed and looked after by our team.</p>
         <a class="more" href="#contact">Get a quote →</a>
       </div>
     </div>
   </section>
 
-  <section class="slot pad evening" id="t1830" aria-labelledby="h-evening">
+  <section class="slot pad s-batteries" id="batteries" aria-labelledby="h-batteries">
     <div class="slot-in">
       <div class="copy">
-        <div class="eyebrow">Evening · On the road</div>
-        <div class="time" aria-hidden="true">18:30</div>
-        <h2 id="h-evening">Top up on the way <i>home.</i></h2>
-        <p>DC fast chargers at Anvil stations in Abuja, Lagos, Port Harcourt, Calabar and Owerri. Back on the road in minutes, not hours.</p>
-        <a class="more" href="#contact">Find a charger →</a>
+        <div class="eyebrow">03 · Batteries &amp; storage</div>
+        <div class="word" aria-hidden="true">Batteries</div>
+        <h2 id="h-batteries">When the grid goes off, <i>nobody notices.</i></h2>
+        <p>Batteries that keep your lights, fridge and work running, whatever the grid does.</p>
+        <a class="more" href="#contact">Ask about batteries →</a>
       </div>
       <div class="pic">
-        <div class="arch"><img src="station.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="An Anvil charging station at dusk" style="object-position:55% center"></div>
+        <div class="arch"><img src="battery.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Anvil home battery mounted on a wall" style="object-position:50% center"></div>
         <div class="orb" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
-  <section class="slot pad night" id="t2200" aria-labelledby="h-night">
+  <section class="slot pad s-home" id="home" aria-labelledby="h-home">
     <div class="slot-in flip">
       <div class="pic">
-        <div class="arch"><img src="battery.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Anvil home battery mounted on a wall" style="object-position:50% center"></div>
-        <div class="moon" aria-hidden="true"></div>
+        <div class="arch"><img src="hearth-wide.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Anvil Hearth wall charger beside a parked car in a sunlit carport" style="object-position:60% center"></div>
+        <div class="orb" aria-hidden="true"></div>
       </div>
       <div class="copy">
-        <div class="eyebrow">Night · Backup</div>
-        <div class="time" aria-hidden="true">22:00</div>
-        <h2 id="h-night">When the grid goes off, <i>nobody notices.</i></h2>
-        <p>Batteries that keep your lights, fridge and work running through the night.</p>
-        <a class="more" href="#contact">Ask about batteries →</a>
+        <div class="eyebrow">04 · Home charging</div>
+        <div class="word" aria-hidden="true">Home</div>
+        <h2 id="h-home">The car is full before <i>you</i> are.</h2>
+        <p>Plug in when you park. Hearth is a wall-mounted charger with a looped cable, made for carports, estates and homes.</p>
+        <a class="more" href="#contact">Ask about Hearth →</a>
       </div>
     </div>
   </section>
@@ -266,7 +247,7 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
       <span class="wm"><b>anv<span class="idot">ı<i></i></span>l</b> <span class="l">energies</span></span>
       <p>Head office: Abuja<br>Abuja · Lagos · Port Harcourt · Calabar · Owerri<br><a href="mailto:info@anvilenergies.com">info@anvilenergies.com</a></p>
     </div>
-    <div class="foot-col"><b>The day</b><a href="#t0600">Morning</a><a href="#t1200">Midday</a><a href="#t1830">Evening</a><a href="#t2200">Night</a></div>
+    <div class="foot-col"><b>What we do</b><a href="#charging">Charging stations</a><a href="#solar">Solar</a><a href="#batteries">Batteries</a><a href="#home">Home charging</a></div>
   </div>
   <div class="pad legal">© <span id="yr">2026</span> Anvil Energies Ltd · RC 10013430</div>
 </footer>
