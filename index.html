@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="/plinth-wide.webp" type="image/webp">
+<link rel="preload" as="image" href="/station-wide.webp" type="image/webp">
 <style>
 :root{--navy:#0E1B2C;--navy2:#142740;--navy3:#1D2F45;--line:#33475F;--gold:#F2B544;--cream:#F5F1E8;--muted:#B9C2CE;--ink2:#4A5566}
 *{box-sizing:border-box}
@@ -47,8 +47,8 @@ h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0}
 /* hero (full-bleed) */
 .hero{position:relative;min-height:clamp(640px,94vh,980px);display:flex;flex-direction:column;justify-content:center;overflow:hidden;background:var(--navy)}
 .hero-bg{position:absolute;inset:0;z-index:0}
-.slide{position:absolute;inset:0;opacity:0;animation:fade 12s infinite}
-.slide:nth-child(2){animation-delay:6s}
+.slide{position:absolute;inset:0;opacity:0;animation:fade 24s infinite}
+.slide:nth-child(2){animation-delay:6s}.slide:nth-child(3){animation-delay:12s}.slide:nth-child(4){animation-delay:18s}
 .slide img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 55%}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,27,44,.96) 0%,rgba(14,27,44,.86) 34%,rgba(14,27,44,.35) 64%,rgba(14,27,44,.15) 100%),linear-gradient(0deg,rgba(14,27,44,.9) 0%,rgba(14,27,44,0) 28%),linear-gradient(180deg,rgba(14,27,44,.75) 0%,rgba(14,27,44,0) 22%)}
 .hero-inner{position:relative;z-index:1;padding-top:120px;padding-bottom:110px}
@@ -66,13 +66,13 @@ h1,h2,h3{font-family:'Outfit',system-ui,sans-serif;margin:0}
 .finder-msg.show{display:block}
 .hero-foot{position:absolute;z-index:1;left:0;right:0;bottom:28px;display:flex;justify-content:space-between;align-items:center;gap:16px}
 .hero-foot .dots{display:flex;gap:8px}
-.dot{height:10px;width:10px;border-radius:5px;background:rgba(245,241,232,.35);animation:dot 12s infinite}
-.dot:nth-child(2){animation-delay:6s}
+.dot{height:10px;width:10px;border-radius:5px;background:rgba(245,241,232,.35);animation:dot 24s infinite}
+.dot:nth-child(2){animation-delay:6s}.dot:nth-child(3){animation-delay:12s}.dot:nth-child(4){animation-delay:18s}
 .caps{position:relative;font-size:14px;font-weight:700;color:var(--cream);min-width:200px;text-align:right;height:20px}
-.caps span{position:absolute;right:0;top:0;opacity:0;white-space:nowrap;animation:fade 12s infinite}
-.caps span:nth-child(2){animation-delay:6s}
-@keyframes fade{0%{opacity:0}6%,46%{opacity:1}52%,100%{opacity:0}}
-@keyframes dot{0%{background:rgba(245,241,232,.35);width:10px}6%,46%{background:var(--gold);width:28px}52%,100%{background:rgba(245,241,232,.35);width:10px}}
+.caps span{position:absolute;right:0;top:0;opacity:0;white-space:nowrap;animation:fade 24s infinite}
+.caps span:nth-child(2){animation-delay:6s}.caps span:nth-child(3){animation-delay:12s}.caps span:nth-child(4){animation-delay:18s}
+@keyframes fade{0%{opacity:0}3%,23%{opacity:1}26%,100%{opacity:0}}
+@keyframes dot{0%{background:rgba(245,241,232,.35);width:10px}3%,23%{background:var(--gold);width:28px}26%,100%{background:rgba(245,241,232,.35);width:10px}}
 @media (prefers-reduced-motion:reduce){.slide,.dot,.caps span{animation:none}.slide:first-child,.caps span:first-child{opacity:1}html{scroll-behavior:auto}}
 @media (max-width:760px){.hero-bg::after{background:linear-gradient(180deg,rgba(14,27,44,.8) 0%,rgba(14,27,44,.72) 45%,rgba(14,27,44,.95) 100%)}.hero-inner{padding-top:110px;padding-bottom:90px}.caps{display:none}}
 
@@ -155,7 +155,9 @@ footer{border-top:1px solid #22344B}
 <main id="main">
   <section class="hero">
     <div class="hero-bg" aria-hidden="false">
-      <div class="slide"><img src="/plinth-wide.webp" width="1600" height="1067" alt="Anvil Plinth charger: two navy pedestals on one shared base, with a car plugged in outside a building with palms" fetchpriority="high"></div>
+      <div class="slide"><img src="/station-wide.webp" width="1600" height="1600" alt="Anvil Energies EV charging station at dusk" fetchpriority="high"></div>
+      <div class="slide"><img src="/battery-wide.webp" width="1600" height="1600" alt="Anvil Energies home battery mounted on a wall" loading="lazy"></div>
+      <div class="slide"><img src="/plinth-wide.webp" width="1600" height="1067" alt="Anvil Plinth charger: two navy pedestals on one shared base, with a car plugged in outside a building with palms" loading="lazy"></div>
       <div class="slide"><img src="/hearth-wide.webp" width="1600" height="1067" alt="Anvil Hearth wall charger: a navy and gold wall-mounted unit with a looped cable beside a parked car in a sunlit carport" loading="lazy"></div>
     </div>
     <div class="wrap hero-inner">
@@ -176,7 +178,7 @@ footer{border-top:1px solid #22344B}
       </form>
       </div>
     </div>
-    <div class="wrap hero-foot" aria-hidden="true"><div class="dots"><span class="dot"></span><span class="dot"></span></div><div class="caps"><span>Plinth · Street pair</span><span>Hearth · Estate wall</span></div></div>
+    <div class="wrap hero-foot" aria-hidden="true"><div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span></div><div class="caps"><span>Anvil charging station</span><span>Anvil home battery</span><span>Plinth · Street pair</span><span>Hearth · Estate wall</span></div></div>
   </section>
 
   <section class="light" id="services">
