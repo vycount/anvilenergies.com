@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Anvil Energies · Forging the future of energy</title>
 <meta name="description" content="Anvil Energies provides DC fast charging for electric vehicles, plus solar and battery systems for homes and businesses, in Abuja, Lagos, Port Harcourt, Calabar and Owerri.">
-<meta name="theme-color" content="#F9E3CC">
+<meta name="theme-color" content="#FFFFFF">
 <link rel="canonical" href="https://anvilenergies.com/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -29,7 +29,7 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{margin:0;background:var(--dawn);color:var(--navy);font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{margin:0;background:#FFFFFF;color:var(--navy);font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:var(--navy)}
 h1,h2,p{margin:0}
 :focus-visible{outline:3px solid var(--navy);outline-offset:3px}
@@ -50,7 +50,7 @@ h1,h2,p{margin:0}
 .btn-gold:hover{background:var(--gold-hover)}
 
 /* hero */
-.hero{position:relative;min-height:800px;overflow:hidden;background:var(--dawn)}
+.hero{position:relative;min-height:800px;overflow:hidden;background:#FFFFFF}
 .hero .sun{position:absolute;right:-90px;bottom:-300px;width:580px;height:580px;border-radius:50%;background:var(--gold)}
 .hdr{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;padding-top:26px;padding-bottom:26px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
@@ -104,17 +104,18 @@ h1,h2,p{margin:0}
 .s-solar .arch{background:#BBD6E8}
 .s-solar .orb{left:22%;top:-40px}
 
-.s-batteries{background:var(--gold)}
-.s-batteries .eyebrow,.s-batteries p{color:#3A2C08}
-.s-batteries .arch{background:#D99E2E}
-.s-batteries .orb{left:-36px;bottom:40px;background:var(--dawn)}
+.s-batteries{background:var(--navy)}
+.s-batteries .eyebrow{color:var(--muted)}
+.s-batteries p{color:var(--soft)}
+.s-batteries .arch{background:#142740}
+.s-batteries h2 i{color:var(--gold)}
+.s-batteries .more{color:var(--gold)}
+.s-batteries .orb{left:-36px;bottom:40px}
 
-.s-home .eyebrow{color:var(--muted)}
-.s-home p{color:var(--soft)}
-.s-home .arch{background:#142740}
-.s-home h2 i{color:var(--gold)}
-.s-home .more{color:var(--gold)}
-.s-home .orb{right:10%;top:-36px;width:84px;height:84px}
+.s-home{background:var(--gold)}
+.s-home .eyebrow,.s-home p{color:#3A2C08}
+.s-home .arch{background:#D99E2E}
+.s-home .orb{right:10%;top:-36px;width:84px;height:84px;background:var(--dawn)}
 
 .night{background:var(--navy);color:var(--cream)}
 
@@ -291,7 +292,7 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
     </div>
   </section>
 
-  <section class="slot pad s-batteries" id="batteries" aria-labelledby="h-batteries">
+  <section class="slot pad s-batteries night" id="batteries" aria-labelledby="h-batteries">
     <div class="slot-in">
       <div class="copy">
         <div class="eyebrow">03 · Batteries &amp; storage</div>
@@ -307,7 +308,7 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
     </div>
   </section>
 
-  <section class="slot pad s-home night" id="home" aria-labelledby="h-home">
+  <section class="slot pad s-home" id="home" aria-labelledby="h-home">
     <div class="slot-in flip">
       <div class="pic">
         <div class="arch"><img src="hearth-wide.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Anvil Hearth wall charger beside a parked car in a sunlit carport" style="object-position:60% center"></div>
