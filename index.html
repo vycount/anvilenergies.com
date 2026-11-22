@@ -27,7 +27,7 @@
   --ink2:#3B4656;--brown:#5A3A06;--slate:#33475F;--muted:#B9C2CE;--soft:#C9D1DC;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{margin:0;background:#FFFFFF;color:var(--navy);font-family:'Manrope',system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:var(--navy)}
@@ -50,8 +50,9 @@ h1,h2,p{margin:0}
 .btn-gold:hover{background:var(--gold-hover)}
 
 /* hero */
-.hero{position:relative;min-height:800px;overflow:hidden;background:#FFFFFF}
-.hero .sun{position:absolute;right:-90px;bottom:-300px;width:580px;height:580px;border-radius:50%;background:var(--gold)}
+.hero{position:relative;display:flex;flex-direction:column;min-height:max(100vh,640px);min-height:max(100svh,640px);overflow:hidden;background:#FFFFFF;color:var(--navy);scroll-snap-align:start;--arch-w:min(720px,68vh,46vw);--arch-r:clamp(16px,3.5vw,72px);--arch-h:var(--arch-w);--arch-b:max(56px,calc(50% - var(--arch-h)/2 - 24px))}
+#charging{scroll-snap-align:start}
+.hero .sun{position:absolute;right:-90px;bottom:-300px;width:580px;height:580px;clip-path:circle(50%);background:var(--gold);overflow:hidden}
 .hdr{position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;padding-top:26px;padding-bottom:26px}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
 .wm{font-family:'Outfit',sans-serif;font-size:24px;white-space:nowrap;line-height:1;color:var(--navy)}
@@ -64,10 +65,15 @@ h1,h2,p{margin:0}
 .nav a:hover{text-decoration:underline}
 .hdr .btn{background:var(--navy);color:var(--dawn);padding:0 22px;min-height:46px;font-size:15px}
 .hdr .btn:hover{background:var(--navy-hover)}
-.hero-body{position:relative;z-index:1;max-width:980px;display:flex;flex-direction:column;gap:28px;padding-top:96px;padding-bottom:120px}
+.hero-stage{flex:1;display:grid;align-items:center}
+.hero-stage>*{grid-area:1/1;justify-self:start;width:100%;min-width:0}
+.hero-body{position:relative;z-index:1;max-width:980px;display:flex;flex-direction:column;gap:28px;padding-top:24px;padding-bottom:84px}
+.hero-foot{position:absolute;left:0;right:0;bottom:26px;z-index:2;display:flex;align-items:center;gap:28px;pointer-events:none}
+.cue{pointer-events:auto;display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;color:inherit;opacity:.75}
+.cue:hover{opacity:1}
 .hero-body .eyebrow{color:var(--brown)}
-.hero h1{font-weight:300;font-size:clamp(60px,8.6vw,128px);line-height:.98;letter-spacing:-.03em;text-wrap:balance}
-.hero h1 i{font-style:italic}
+.hero h1{font-weight:300;font-size:clamp(52px,min(8.6vw,14.5vh),128px);font-size:clamp(52px,min(8.6vw,14.5svh),128px);line-height:.98;letter-spacing:-.03em;text-wrap:balance}
+.hero h1 i{font-style:italic;background:linear-gradient(var(--gold),var(--gold)) 0 92%/100% .07em no-repeat}
 .lead{font-size:20px;line-height:1.6;color:var(--ink2);max-width:520px}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px}
 .cta-row .btn{min-height:54px;padding:0 28px}
@@ -79,30 +85,27 @@ h1,h2,p{margin:0}
 
 /* service sections: each takes the Day cycle colour for its position */
 .slot{padding-top:84px;padding-bottom:84px;overflow:hidden}
-.slot-in{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;gap:56px;align-items:center;justify-content:space-between}
+.slot-in{max-width:1380px;margin:0 auto;display:flex;flex-wrap:wrap;gap:44px;align-items:center;justify-content:space-between}
 .slot-in.flip{flex-wrap:wrap-reverse}
 .copy{flex:1 1 440px;min-width:0;display:flex;flex-direction:column;gap:20px}
 .word{font-family:'Fraunces',Georgia,serif;font-weight:300;font-size:clamp(56px,8vw,124px);line-height:.95;letter-spacing:-.04em}
-.slot h2{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(34px,4.2vw,58px);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+.slot h2{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(28px,2.9vw,42px);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
 .slot h2 i{font-style:italic;font-weight:300}
-.slot p{font-size:19px;line-height:1.65;max-width:460px}
+.slot p{font-size:19px;line-height:1.65;max-width:620px;text-wrap:pretty}
 .more{font-weight:800;font-size:17px;width:fit-content}
 .pic{position:relative;flex:1 1 360px;max-width:460px;min-width:0}
 .arch{aspect-ratio:4/5;border-radius:999px 999px 28px 28px;overflow:hidden}
 .arch img{display:block;width:100%;height:100%;object-fit:cover}
-.orb{position:absolute;width:92px;height:92px;border-radius:50%;background:var(--gold)}
 
 .s-charging{background:var(--noon)}
 .s-charging .eyebrow{color:var(--slate)}
 .s-charging p{color:var(--ink2)}
 .s-charging .arch{background:#BBD6E8}
-.s-charging .orb{right:-34px;bottom:56px}
 
 .s-solar{background:var(--morning)}
 .s-solar .eyebrow{color:var(--brown)}
 .s-solar p{color:var(--ink2)}
 .s-solar .arch{background:#E9BE8E}
-.s-solar .orb{left:22%;top:-40px}
 
 .s-batteries{background:var(--navy)}
 .s-batteries .eyebrow{color:var(--muted)}
@@ -110,12 +113,10 @@ h1,h2,p{margin:0}
 .s-batteries .arch{background:#142740}
 .s-batteries h2 i{color:var(--gold)}
 .s-batteries .more{color:var(--gold)}
-.s-batteries .orb{left:-36px;bottom:40px}
 
 .s-home{background:var(--gold)}
 .s-home .eyebrow,.s-home p{color:#3A2C08}
 .s-home .arch{background:#D99E2E}
-.s-home .orb{right:10%;top:-36px;width:84px;height:84px;background:var(--dawn)}
 
 .night{background:var(--navy);color:var(--cream)}
 
@@ -143,8 +144,12 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
 .legal{padding-bottom:32px;color:#8899AD;font-size:13px}
 
 @media (max-width:860px){.nav{display:none}.hdr{justify-content:space-between}}
-@media (max-width:560px){.hdr{gap:12px}.wm{font-size:21px}.hdr .btn{padding:0 18px;min-height:42px;font-size:14px}.hero-body{padding-top:56px;padding-bottom:160px}.slot{padding-top:64px;padding-bottom:64px}.slot-in{gap:44px}.hero .sun{width:420px;height:420px;bottom:-290px}}
+@media (max-width:560px){.hdr{gap:12px}.wm{font-size:21px}.hdr .btn{padding:0 18px;min-height:42px;font-size:14px}.hero-body{padding-top:20px;padding-bottom:120px}.slot{padding-top:64px;padding-bottom:64px}.slot-in{gap:44px}.hero .sun{width:420px;height:420px;bottom:-290px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media (max-height:780px){.hero-body{gap:20px}.lead{font-size:18px;line-height:1.55}.follow{margin-top:6px}.cta-row .btn{min-height:50px}}
+@media (max-height:680px){.follow{display:none}.hero-body{padding-bottom:72px}}
+@media (max-width:560px){.hero-body{gap:18px;padding-bottom:76px}.hero h1{font-size:clamp(40px,min(14vw,7.4vh),60px);font-size:clamp(40px,min(14vw,7.4svh),60px)}.lead{font-size:17px;line-height:1.5}.cta-row{flex-wrap:nowrap}.cta-row .btn{padding:0 16px;min-height:50px;font-size:15px;flex:1 1 auto;justify-content:center}.follow{margin-top:4px;gap:8px}}
+@media (max-width:560px) and (max-height:760px){.follow{display:none}}
 
 /* motion: everything below is switched off for people who ask for reduced motion */
 .progress{display:none}
@@ -153,22 +158,20 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
   @keyframes drop{from{opacity:0;translate:0 -14px}to{opacity:1;translate:0 0}}
   @keyframes sunrise{from{opacity:0;translate:0 160px}to{opacity:1;translate:0 0}}
   @keyframes breathe{0%,100%{scale:1}50%{scale:1.06}}
-  @keyframes float{0%,100%{translate:0 0}50%{translate:0 -12px}}
-  @keyframes pop{from{scale:0}to{scale:1}}
   @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(242,181,68,0)}50%{box-shadow:0 0 .4em .1em rgba(242,181,68,.8)}}
   @keyframes ring{0%{box-shadow:0 0 0 0 rgba(242,181,68,.55)}70%,100%{box-shadow:0 0 0 18px rgba(242,181,68,0)}}
-  @keyframes underline{to{background-size:100% .07em}}
+  @keyframes underline{from{background-size:0 .07em}}
 
   /* page load: header drops in, hero copy rises in sequence, the sun comes up and slowly breathes */
   .hdr{animation:drop .7s cubic-bezier(.2,.7,.2,1) both}
   .hero .sun{animation:sunrise 1.7s cubic-bezier(.2,.7,.2,1) .15s both,breathe 10s ease-in-out 1.9s infinite}
-  .hero-body>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  .hero-body>*{animation:rise .9s cubic-bezier(.2,.7,.2,1) backwards}
   .hero-body>:nth-child(1){animation-delay:.15s}
   .hero-body>:nth-child(2){animation-delay:.3s}
   .hero-body>:nth-child(3){animation-delay:.45s}
   .hero-body>:nth-child(4){animation-delay:.6s}
   .hero-body>:nth-child(5){animation-delay:.75s}
-  .hero h1 i{background:linear-gradient(var(--gold),var(--gold)) 0 92%/0 .07em no-repeat;animation:underline 1s cubic-bezier(.2,.7,.2,1) 1.1s forwards}
+  .hero h1 i{background:linear-gradient(var(--gold),var(--gold)) 0 92%/100% .07em no-repeat;animation:underline 1s cubic-bezier(.2,.7,.2,1) 1.1s backwards}
   .idot i{animation:glow 3.2s ease-in-out infinite}
 
   /* scroll reveals: the script adds .in when a block comes into view */
@@ -179,15 +182,9 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
   .js :is(.slot-in.in .copy,.contact-in.in,footer.in .foot)>:nth-child(4){animation-delay:.36s}
   .js :is(.slot-in.in .copy,.contact-in.in,footer.in .foot)>:nth-child(5){animation-delay:.48s}
 
-  /* image arches rise from their base, the accent circle pops in and then drifts */
+  /* image frames rise from their base */
   .js .slot-in .arch{opacity:0;translate:0 60px;scale:.94;transform-origin:50% 100%;transition:opacity 1s cubic-bezier(.2,.7,.2,1),translate 1.1s cubic-bezier(.2,.7,.2,1),scale 1.1s cubic-bezier(.2,.7,.2,1)}
   .js .slot-in.in .arch{opacity:1;translate:0 0;scale:1}
-  .js .slot-in .orb{scale:0}
-  .js .slot-in.in .orb{animation:pop .7s cubic-bezier(.34,1.56,.64,1) .55s both,float var(--fd,7s) ease-in-out 1.4s infinite}
-  .s-charging .orb{--fd:7s}
-  .s-solar .orb{--fd:9s}
-  .s-batteries .orb{--fd:8s}
-  .s-home .orb{--fd:10s}
 
   /* the contact button gives a slow, gentle ping */
   .js .contact-in.in>.btn{animation:rise .85s cubic-bezier(.2,.7,.2,1) .12s backwards,ring 2.8s ease-out 1.6s infinite}
@@ -216,6 +213,93 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
     .arch img{transition:scale .9s cubic-bezier(.2,.7,.2,1)}
     .arch:hover img{scale:1.2}
   }
+
+  /* ---- hero cycle: the first screen slowly becomes each service, then returns to the default ---- */
+  :root{--morph:1.7s;--ease:cubic-bezier(.65,.05,.25,1)}
+  .hero{transition:background-color var(--morph) var(--ease),color var(--morph) var(--ease)}
+  .hero:not([data-s="0"]){background-color:var(--bg)}
+  .hero[data-s="1"]{--bg:var(--noon);--ar:#BBD6E8}
+  .hero[data-s="2"]{--bg:var(--morning);--ar:#E9BE8E}
+  .hero[data-s="3"]{--bg:var(--navy);--ar:#142740;color:var(--cream)}
+  .hero[data-s="4"]{--bg:var(--gold);--ar:#D99E2E}
+
+  /* header follows the colour wash */
+  .hero .nav a,.hero .wm,.hero .wm .l,.hero .hdr .btn{transition:color var(--morph) var(--ease),background-color var(--morph) var(--ease),background-size .25s}
+  .hero .nav a{color:inherit}
+  .hero .brand svg rect{transition:fill var(--morph) var(--ease)}
+  .hero .idot i{transition:background-color var(--morph) var(--ease)}
+  .hero[data-s="2"] .brand svg rect:first-child{fill:#FFFFFF}
+  .hero[data-s="2"] .idot i{background:#FFFFFF}
+  .hero[data-s="4"] .brand svg rect:first-child{fill:var(--navy)}
+  .hero[data-s="4"] .brand svg rect:not(:first-child){fill:#FFFFFF}
+  .hero[data-s="4"] .wm,.hero[data-s="4"] .wm .l{color:#FFFFFF}
+  .hero[data-s="4"] .idot i{background:var(--navy)}
+  .hero[data-s="3"] .wm{color:var(--cream)}
+  .hero[data-s="3"] .wm .l{color:var(--muted)}
+  .hero[data-s="3"] .brand svg rect:not(:first-child){fill:var(--cream)}
+  .hero[data-s="3"] .hdr .btn{background:var(--gold);color:var(--navy)}
+  .hero[data-s="3"] .hdr .btn:hover{background:var(--gold-hover)}
+
+  /* the sun becomes the picture frame */
+  .hero .sun{transition:width var(--morph) var(--ease),height var(--morph) var(--ease),right var(--morph) var(--ease),bottom var(--morph) var(--ease),background-color var(--morph) var(--ease)}
+  .hero:not([data-s="0"]) .sun{width:var(--arch-w);height:var(--arch-h);right:var(--arch-r);bottom:var(--arch-b);background-color:var(--ar);cursor:pointer}
+  .hero .sun img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;scale:1.14;transition:opacity var(--morph) var(--ease),scale 0s linear var(--morph)}
+  .hero[data-s="1"] .sun img:nth-child(1),.hero[data-s="2"] .sun img:nth-child(2),.hero[data-s="3"] .sun img:nth-child(3),.hero[data-s="4"] .sun img:nth-child(4){opacity:1;scale:1;transition:opacity var(--morph) var(--ease),scale 9s linear}
+
+
+  /* default copy leaves upward and returns with a stagger */
+  .hero-body>*{transition:opacity .6s ease,translate .7s ease,visibility 0s linear .7s}
+  .hero:not([data-s="0"]) .hero-body>*{opacity:0;translate:0 -24px;visibility:hidden}
+  .hero[data-s="0"] .hero-body>*{transition:opacity .9s ease var(--d),translate 1s cubic-bezier(.2,.7,.2,1) var(--d),visibility 0s}
+  .hero-body>:nth-child(1){--d:.8s}
+  .hero-body>:nth-child(2){--d:.92s}
+  .hero-body>:nth-child(3){--d:1.04s}
+  .hero-body>:nth-child(4){--d:1.16s}
+  .hero-body>:nth-child(5){--d:1.28s}
+
+  /* service copy: built by the script from the sections below, one block per service */
+  .svc-set{position:relative;z-index:1;display:grid;max-width:calc(100vw - var(--arch-w) - var(--arch-r) - 24px);padding-right:0}
+  .svc{grid-area:1/1;display:flex;flex-direction:column;gap:20px;pointer-events:none;cursor:pointer;color:var(--navy)}
+  .svc.on{pointer-events:auto}
+  .svc>*{opacity:0;translate:0 -22px;transition:opacity .45s ease,translate .6s ease}
+  .svc.on>*{opacity:1;translate:0 0;animation:rise .95s cubic-bezier(.2,.7,.2,1) calc(.8s + var(--k)*.13s) backwards}
+  .svc.on .word{animation-name:wordIn}
+  @keyframes wordIn{from{opacity:0;translate:0 .3em;scale:.96;letter-spacing:-.01em}}
+  @keyframes nudge{0%,100%{translate:0 0}50%{translate:6px 0}}
+  @keyframes fill{to{transform:scaleX(1)}}
+  @keyframes bob{0%,100%{translate:0 0}50%{translate:0 5px}}
+  .svc .word{transform-origin:0 100%}
+  .svc h2{font-family:'Fraunces',Georgia,serif;font-weight:400;font-size:clamp(28px,2.9vw,42px);line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+  .svc h2 i{font-style:italic;font-weight:300}
+  .svc p{font-size:19px;line-height:1.65;max-width:620px;text-wrap:pretty}
+  .svc .more{font-weight:800;font-size:17px;width:fit-content}
+  .svc .more .arr{display:inline-block;animation:nudge 1.5s ease-in-out infinite}
+  .svc .eyebrow{color:var(--eb)}
+  .svc p{color:var(--pc)}
+  .svc[data-i="1"]{--eb:var(--slate);--pc:var(--ink2)}
+  .svc[data-i="2"]{--eb:var(--brown);--pc:var(--ink2)}
+  .svc[data-i="3"]{--eb:var(--muted);--pc:var(--soft);color:var(--cream)}
+  .svc[data-i="3"] h2 i,.svc[data-i="3"] .more{color:var(--gold)}
+  .svc[data-i="4"]{--eb:#3A2C08;--pc:#3A2C08}
+
+  /* progress segments and the scroll cue */
+  .dots{display:flex;gap:8px;margin-left:4px}
+  .dots i{position:relative;display:block;width:34px;height:3px;border-radius:3px;overflow:hidden}
+  .dots i::before,.dots i::after{content:"";position:absolute;inset:0;background:currentColor}
+  .dots i::before{opacity:.22}
+  .dots i::after{transform:scaleX(0);transform-origin:0 50%}
+  .dots i.done::after{transform:scaleX(1)}
+  .dots i.on::after{animation:fill var(--hold,6s) linear forwards}
+  .cue .arr{display:inline-block;animation:bob 1.8s ease-in-out infinite}
+
+  @media (max-width:700px){
+    .hero{--arch-w:min(76vw,42vh);--arch-r:20px}
+    @media (max-height:700px){.hero{--arch-w:min(60vw,35vh)}}
+    .hero-stage{align-items:start}
+    .svc-set{max-width:none;padding-right:clamp(20px,5vw,96px)}
+    .svc p{display:none}
+    .hero:not([data-s="0"]) .sun{bottom:76px}
+  }
 }
 </style>
 </head>
@@ -223,7 +307,7 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
 <div class="progress" aria-hidden="true"></div>
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="hero">
+<div class="hero" data-s="0">
   <div class="sun" aria-hidden="true"></div>
   <header class="pad hdr">
     <a class="brand" href="./" aria-label="Anvil Energies home">
@@ -238,6 +322,7 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
     </nav>
     <a class="btn" href="#contact">Contact us</a>
   </header>
+  <div class="hero-stage">
   <div class="pad hero-body">
     <div class="eyebrow">EV charging · Solar · Storage</div>
     <h1 class="serif">Forging the <i>future</i> of energy.</h1>
@@ -254,6 +339,8 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
       <a class="chip" href="#home">Home charging</a>
     </nav>
   </div>
+  </div>
+  <div class="pad hero-foot"><a class="cue" href="#charging">Scroll <span class="arr" aria-hidden="true">↓</span></a></div>
 </div>
 
 <main id="main">
@@ -269,7 +356,6 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
       </div>
       <div class="pic">
         <div class="arch"><img src="plinth-wide.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Anvil Plinth charger: two navy pedestals on one shared base, with a car plugged in outside a building with palms" style="object-position:68% center"></div>
-        <div class="orb" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -280,7 +366,6 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
         <!-- PLACEHOLDER: midday-placeholder.webp is a cropped Anvil solar-canopy station render (golden-hour light).
              Swap in a real rooftop-solar photo, 4:5 portrait, same filename or update src. -->
         <div class="arch"><img src="midday-placeholder.webp" width="806" height="1008" loading="lazy" decoding="async" alt="Anvil charging bays under a solar canopy, with two cars plugged in" style="object-position:50% center"></div>
-        <div class="orb" aria-hidden="true"></div>
       </div>
       <div class="copy">
         <div class="eyebrow">02 · Solar panels</div>
@@ -303,7 +388,6 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
       </div>
       <div class="pic">
         <div class="arch"><img src="battery.webp" width="1200" height="1200" loading="lazy" decoding="async" alt="Anvil home battery mounted on a wall" style="object-position:50% center"></div>
-        <div class="orb" aria-hidden="true"></div>
       </div>
     </div>
   </section>
@@ -312,7 +396,6 @@ footer{background:var(--navy);color:var(--cream);border-top:1px solid var(--line
     <div class="slot-in flip">
       <div class="pic">
         <div class="arch"><img src="hearth-wide.webp" width="1600" height="1067" loading="lazy" decoding="async" alt="Anvil Hearth wall charger beside a parked car in a sunlit carport" style="object-position:60% center"></div>
-        <div class="orb" aria-hidden="true"></div>
       </div>
       <div class="copy">
         <div class="eyebrow">04 · Home charging</div>
@@ -359,6 +442,56 @@ document.getElementById('yr').textContent=new Date().getFullYear();
     },{threshold:.18,rootMargin:'0px 0px -8% 0px'});
     for(var j=0;j<els.length;j++)io.observe(els[j]);
   }catch(err){root.classList.remove('js')}
+})();
+</script>
+<script>
+(function(){
+  var hero=document.querySelector('.hero');
+  if(!hero||!window.matchMedia||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  try{
+    var ids=['charging','solar','batteries','home'];
+    var stage=hero.querySelector('.hero-stage'),sun=hero.querySelector('.sun'),foot=hero.querySelector('.hero-foot');
+    var set=document.createElement('div');set.className='pad svc-set';set.setAttribute('aria-hidden','true');
+    var svcs=[],imgs=[],targets=[];
+    function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+    ids.forEach(function(id,i){
+      var sec=document.getElementById(id);if(!sec)return;
+      var c=sec.querySelector('.copy'),im=sec.querySelector('.arch img');
+      var d=el('div','svc');d.setAttribute('data-i',i+1);
+      var h=c.querySelector('h2').cloneNode(true);h.removeAttribute('id');
+      var more=c.querySelector('.more');
+      var kids=[el('div','eyebrow',c.querySelector('.eyebrow').textContent),el('div','word',c.querySelector('.word').textContent),h,el('p',null,c.querySelector('p').textContent)];
+      var m=el('span','more',more.firstChild.textContent.trim()+' ');m.appendChild(el('span','arr','→'));kids.push(m);
+      kids.forEach(function(k,n){k.style.setProperty('--k',n);d.appendChild(k)});
+      d.addEventListener('click',function(){sec.scrollIntoView({behavior:'smooth',block:'start'})});
+      set.appendChild(d);svcs.push(d);targets.push(sec);
+      var pic=el('img');pic.alt='';pic.decoding='async';pic.draggable=false;pic.style.objectPosition=im.style.objectPosition||'50% center';
+      pic.setAttribute('data-src',im.getAttribute('src'));sun.appendChild(pic);imgs.push(pic);
+    });
+    if(!svcs.length)return;
+    stage.appendChild(set);
+    var dots=el('div','dots');dots.setAttribute('aria-hidden','true');
+    var total=svcs.length+1,dotEls=[];
+    for(var k=0;k<total;k++){var di=document.createElement('i');dots.appendChild(di);dotEls.push(di)}
+    foot.appendChild(dots);
+    function loadImgs(){imgs.forEach(function(p){if(!p.src)p.src=p.getAttribute('data-src')})}
+    if(document.readyState==='complete')loadImgs();else window.addEventListener('load',loadImgs);
+    sun.addEventListener('click',function(){var n=+hero.getAttribute('data-s');if(n>0&&targets[n-1])targets[n-1].scrollIntoView({behavior:'smooth',block:'start'})});
+
+    
+    var HOLD=[8000,6000,6000,6000,6000],n=0,first=true;
+    function replay(){var u=hero.querySelector('h1 i');if(!u)return;u.style.animation='none';void u.offsetWidth;u.style.animation=''}
+    function paint(){
+      hero.setAttribute('data-s',n);
+      hero.style.setProperty('--hold',HOLD[Math.min(n,HOLD.length-1)]+'ms');
+      svcs.forEach(function(s,i){s.classList.toggle('on',i+1===n)});
+      dotEls.forEach(function(d,i){d.className=i<n?'done':(i===n?'on':'')});
+      if(n===0&&!first)replay();
+      first=false;
+    }
+    function next(){n=(n+1)%total;paint();setTimeout(next,HOLD[Math.min(n,HOLD.length-1)])}
+    paint();setTimeout(next,HOLD[0]);
+  }catch(err){}
 })();
 </script>
 </body>
